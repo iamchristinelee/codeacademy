@@ -3,7 +3,7 @@
 Image tutorial
 ==============
 
-A short tutorial on plotting images with Matplotlib.
+A short tutorial on plotting images with Matplotlib!
 
 .. _imaging_startup:
 
