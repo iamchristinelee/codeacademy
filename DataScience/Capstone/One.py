@@ -53,3 +53,27 @@ plt.show()
 """
 
 """
+
+species['is_protected'] = species.conservation_status.apply(lambda x: 'True' if x != 'No Intervention' else 'False')
+
+print(species.head(5))
+
+
+species['is_protected'] = species.conservation_status != 'No Intervention'
+
+category_counts = species.groupby(['category', 'is_protected']).scientific_name.nunique().reset_index()
+
+print category_counts.head()
+
+category_pivot = category_counts.pivot(columns='is_protected',
+                      index='category',
+                      values='scientific_name')\
+                      .reset_index()
+  
+print category_pivot
+
+category_pivot.columns=['category','not_protected','protected']
+
+category_pivot['percent_protected']=category_pivot.protected/(category_pivot.protected + category_pivot.not_protected)
+
+print(category_pivot.head(5))
